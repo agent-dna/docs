@@ -1,0 +1,78 @@
+/**
+ * ============================================================================
+ *  AgentDNA — Color Palette (single source of truth)
+ * ============================================================================
+ *
+ *  This file is the ONE place to change the site's colors. Every other
+ *  stylesheet reads from the custom properties defined here, so editing the
+ *  values below re-themes the whole documentation site.
+ *
+ *  The brand variables (prefixed `--adna-`) hold the raw palette. The Infima
+ *  variables (prefixed `--ifm-`) map that palette onto the Docusaurus theme.
+ *  When you want a new color scheme, edit the `--adna-` values and, if needed,
+ *  the mappings underneath them.
+ * ----------------------------------------------------------------------------
+ */
+
+:root {
+  /* --- Brand palette: light mode -------------------------------------- */
+  --adna-primary: #4f46e5; /* indigo, used for links, buttons, accents */
+  --adna-primary-dark: #3f37cf;
+  --adna-primary-darker: #3b34c4;
+  --adna-primary-darkest: #312aa1;
+  --adna-primary-light: #6259e8;
+  --adna-primary-lighter: #6e66ea;
+  --adna-primary-lightest: #8c85ef;
+
+  --adna-accent: #06b6d4; /* cyan, secondary highlight */
+  --adna-accent-dark: #0891b2;
+
+  --adna-ink: #1c1e26; /* primary text */
+  --adna-surface: #ffffff; /* page background */
+  --adna-surface-alt: #f6f7fb; /* cards, code blocks, subtle panels */
+  --adna-border: #e4e6ef;
+
+  /* --- Map the brand palette onto Infima (light mode) ----------------- */
+  --ifm-color-primary: var(--adna-primary);
+  --ifm-color-primary-dark: var(--adna-primary-dark);
+  --ifm-color-primary-darker: var(--adna-primary-darker);
+  --ifm-color-primary-darkest: var(--adna-primary-darkest);
+  --ifm-color-primary-light: var(--adna-primary-light);
+  --ifm-color-primary-lighter: var(--adna-primary-lighter);
+  --ifm-color-primary-lightest: var(--adna-primary-lightest);
+
+  --ifm-code-font-size: 95%;
+  --ifm-background-surface-color: var(--adna-surface-alt);
+  --docusaurus-highlighted-code-line-bg: rgba(79, 70, 229, 0.1);
+}
+
+/* For readability, dark mode uses a lighter, less saturated brand color. */
+[data-theme='dark'] {
+  /* --- Brand palette: dark mode --------------------------------------- */
+  --adna-primary: #818cf8;
+  --adna-primary-dark: #616ff6;
+  --adna-primary-darker: #5061f5;
+  --adna-primary-darkest: #2138f2;
+  --adna-primary-light: #a1a9fa;
+  --adna-primary-lighter: #b2b9fb;
+  --adna-primary-lightest: #e3e6fe;
+
+  --adna-accent: #22d3ee;
+  --adna-accent-dark: #06b6d4;
+
+  --adna-ink: #e6e7eb;
+  --adna-surface: #1b1b1d;
+  --adna-surface-alt: #242526;
+  --adna-border: #3a3a3c;
+
+  /* --- Map the brand palette onto Infima (dark mode) ------------------ */
+  --ifm-color-primary: var(--adna-primary);
+  --ifm-color-primary-dark: var(--adna-primary-dark);
+  --ifm-color-primary-darker: var(--adna-primary-darker);
+  --ifm-color-primary-darkest: var(--adna-primary-darkest);
+  --ifm-color-primary-light: var(--adna-primary-light);
+  --ifm-color-primary-lighter: var(--adna-primary-lighter);
+  --ifm-color-primary-lightest: var(--adna-primary-lightest);
+
+  --docusaurus-highlighted-code-line-bg: rgba(129, 140, 248, 0.2);
+}
