@@ -8,9 +8,9 @@ sidebar_position: 2
 
 Five terms carry most of the weight in AgentDNA. Everything else in the documentation builds on them, so it is worth getting comfortable with these before reading any code.
 
-## DID, the identity
+## Agent ID, the identity
 
-A Decentralized Identifier is the unique cryptographic identity of an agent or a user, written in the form `did:rubix:abc...`. It is backed by a keypair. The owner signs with a private key, and anyone can verify the signature using the public key resolved from the chain. A DID is the anchor that makes every other guarantee possible, because it ties an action to a key that only one party controls.
+An agent ID is the unique cryptographic identity of an agent or a user, written in the form `did:rubix:abc...`. It is backed by a keypair. The owner signs with a private key, and anyone can verify the signature using the public key resolved from Immutable Provenance. An agent ID is the anchor that makes every other guarantee possible, because it ties an action to a key that only one party controls.
 
 ## Envelope, one signed message
 
@@ -34,12 +34,12 @@ Agents pass work along a line, for example from a user to a coordinator to a wor
 
 ## Card, the policy
 
-Each agent has a card, usually written as a `skill.md` file, that describes what the agent is allowed to do: its skills, its permissions, and its constraints. A card is the agent's job description. It is signed by an administrator and stored on-chain, so it cannot be quietly changed after the fact. [CBAC](./coca-and-cbac.md#cbac-context-based-access-control) reads the card to decide whether an action is permitted.
+Each agent has a card, usually written as a `skill.md` file, that describes what the agent is allowed to do: its skills, its permissions, and its constraints. A card is the agent's job description. It is signed by an administrator and stored in Immutable Provenance, so it cannot be quietly changed after the fact. [CBAC](./coca-and-cbac.md#cbac-context-based-access-control) reads the card to decide whether an action is permitted.
 
-## NFT, the permanent record
+## Record, the permanent store
 
-Identities, policy cards, and finished audit trails are all stored as NFTs on the Rubix chain. An NFT is the immutable, on-chain home for a piece of AgentDNA data. The [NFTs reference](../sdk/nfts.md) describes the four kinds the system uses.
+Identities, policy cards, and finished audit trails are all stored as Records in Immutable Provenance. A Record is the immutable home for a piece of AgentDNA data. The [Records reference](../sdk/nfts.md) describes the four kinds the system uses.
 
 ## How the five fit together
 
-A user with a **DID** signs an intent, producing an **envelope**. An agent receives it, verifies the **chain** so far, checks the action against its **card**, and signs its own envelope on top. When the flow finishes, the complete chain is written to an audit **NFT**. Each term is one link in that sequence.
+A user with an **agent ID** signs an intent, producing an **envelope**. An agent receives it, verifies the **chain** so far, checks the action against its **card**, and signs its own envelope on top. When the flow finishes, the complete chain is written to an audit **Record**. Each term is one link in that sequence.
