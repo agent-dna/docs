@@ -8,7 +8,7 @@ sidebar_position: 1
 
 | Term | Plain meaning |
 | --- | --- |
-| **DID** | A cryptographic identity (`did:rubix:...`) for an agent or a user. |
+| **Agent ID** | A cryptographic identity (`did:rubix:...`) for an agent or a user. |
 | **CoCA** | Chain of Custody and Authenticity, the guarantee of who signed what. |
 | **CBAC** | Context-Based Access Control, the check of whether an action was allowed. |
 | **Envelope** | A message plus metadata that gets signed. |
@@ -16,8 +16,10 @@ sidebar_position: 1
 | **Chain** | Blocks nested through `parent_block`, forming a tamper-proof history. |
 | **`parent_block`** | The previous block, tucked inside and signed over by the current one. |
 | **Card / `skill.md`** | An agent's policy, or job description. |
-| **Identity NFT** | The on-chain record of an agent's or user's identity and policy. |
-| **Audit NFT** | The on-chain record of a completed interaction chain. |
+| **Record** | The immutable entry in Immutable Provenance that stores a piece of AgentDNA data. |
+| **Identity Record** | The entry in Immutable Provenance that stores an agent's or user's identity and policy. |
+| **Audit Record** | The entry in Immutable Provenance that stores a completed interaction chain. |
+| **Immutable Provenance** | The separate service that resolves agent IDs, performs cryptography, and stores Records. |
 | **`build()`** | Sign and emit an envelope. |
 | **`handle()`** | Verify an inbound envelope, running CoCA and optional CBAC. |
 | **`kind`** | Either `"user"`, which signs intents, or `"agent"`, which does work and carries a policy. |

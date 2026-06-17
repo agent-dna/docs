@@ -33,11 +33,11 @@ If no API key is configured, even this dependency is soft. The application still
 
 ## What an organization runs for you
 
-Around the node, an organization that operates AgentDNA at scale may run a small platform: a service that governs which agents exist and what they may do, and a dashboard that shows the history of what happened. You integrate with these, but you do not build them, and your agent code does not change whether they are present or not.
+Around Immutable Provenance, an organization that operates AgentDNA at scale may run a small platform: a service that governs which agents exist and what they may do, and a dashboard that shows the history of what happened. You integrate with these, but you do not build them, and your agent code does not change whether they are present or not.
 
 As an adopter, two facts about that platform are worth carrying:
 
 - The **policy** your agent is checked against does not come from your code. It is issued elsewhere and stored in Immutable Provenance, which is the subject of [where your agent's policy comes from](./policy-source.md).
 - The **audit trail** your flows produce is readable without any extra work on your part, because the platform observes the Records you already write. You sign and record; the operator reads.
 
-The separation is the point. You can adopt the SDK and a node alone, and the governance and observability pieces can be added later without you rewriting anything.
+The separation is the point. You can adopt the SDK and Immutable Provenance alone, and the governance and observability pieces can be added later without you rewriting anything.
