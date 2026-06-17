@@ -41,3 +41,4 @@ As an adopter, two facts about that platform are worth carrying:
 - The **audit trail** your flows produce is readable without any extra work on your part, because the platform observes the Records you already write. You sign and record; the operator reads.
 
 The separation is the point. You can adopt the SDK and Immutable Provenance alone, and the governance and observability pieces can be added later without you rewriting anything.
+

@@ -24,3 +24,4 @@ sidebar_position: 1
 | **`handle()`** | Verify an inbound envelope, running CoCA and optional CBAC. |
 | **`kind`** | Either `"user"`, which signs intents, or `"agent"`, which does work and carries a policy. |
 | **MCP** | The tool-server boundary where agents touch external APIs, and where CBAC is enforced. |
+
