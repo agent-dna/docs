@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "title": "Examples",
-    "description": "Reference integrations that show AgentDNA at work in a complete application."
+    "description": "A walkthrough of AgentDNA's core operations, build(), handle() and create_workflow_provenance()."
   }
 }

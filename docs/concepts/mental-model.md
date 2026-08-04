@@ -1,45 +1,189 @@
 ---
 id: mental-model
-title: The mental model
+title: Core Data Structures
 sidebar_position: 2
 ---
 
-# The mental model
+# Core Data Structures
 
-Five terms carry most of the weight in AgentDNA. Everything else in the documentation builds on them, so it is worth getting comfortable with these before reading any code.
+AgentDNA revolves around three core data structures.
 
-## Agent ID, the identity
+## Actor
 
-An agent ID is the unique cryptographic identity of an agent or a user, written in the form `did:rubix:abc...`. It is backed by a keypair. The owner signs with a private key, and anyone can verify the signature using the public key resolved from Immutable Provenance. An agent ID is the anchor that makes every other guarantee possible, because it ties an action to a key that only one party controls.
+Every participant in a workflow is represented by an `Actor`.
 
-## Envelope, one signed message
+An Actor represents the digital identity of a participant involved in a workflow. AgentDNA currently supports three Actor types:
 
-When an agent sends a message, it does not send raw text. It wraps the message in an envelope, which holds the payload together with metadata such as identifiers and timestamps, and then signs the result. The signed unit is called a block:
+- `human`
+- `agent`
+- `app`
+
+Each Actor contains:
 
 ```json
 {
-  "agent":     "did:rubix:...",
-  "name":      "WorkerAgent",
-  "type":      "execute",
-  "envelope":  { "...the signed content...": true },
-  "signature": "3045..."
+  "id": "bafybmifqa6ctol2tl5lksiufnnijfpcwhnocukud5bncbd55bbsfvn7upy",
+  "name": "CoordinatorAgent",
+  "type": "agent",
+  "metadata": {}
 }
 ```
 
-The `agent` field records who signed, `name` is the human-readable label, `type` is the role of this hop (covered in [the envelope and chain model](../sdk/envelope-and-chain.md)), and `signature` is the proof that the named agent really produced it.
+| Field | Description |
+| --- | --- |
+| `id` | Globally unique Actor identifier |
+| `name` | Human-readable Actor name |
+| `type` | `human`, `agent` or `app` |
+| `metadata` | Optional Actor-specific metadata |
 
-## Chain, the linked history
+## Envelope
 
-Agents pass work along a line, for example from a user to a coordinator to a worker. Each block tucks the previous block inside itself, in a field called `parent_block`, before it is signed. Because the signature is computed over that nested content, it covers the entire history underneath it. You cannot alter an earlier hop without invalidating every signature above it. That nested structure is the chain, and it is the core of the [CoCA guarantee](./coca-and-cbac.md#coca-chain-of-custody-and-authenticity).
+An `Envelope` captures a single interaction between two Actors.
 
-## Card, the policy
+Every Envelope is digitally signed by the sender and references its parent Envelope, allowing workflows to be represented as a cryptographically verifiable chain.
 
-Each agent has a card, usually written as a `skill.md` file, that describes what the agent is allowed to do: its skills, its permissions, and its constraints. A card is the agent's job description. It is signed by an administrator and stored in Immutable Provenance, so it cannot be quietly changed after the fact. [CBAC](./coca-and-cbac.md#cbac-context-based-access-control) reads the card to decide whether an action is permitted.
+```json
+{
+  "from": {
+    "id": "...",
+    "name": "CoordinatorAgent",
+    "type": "agent",
+    "metadata": {}
+  },
+  "to": {
+    "id": "...",
+    "name": "WorkerAgent",
+    "type": "agent",
+    "metadata": {}
+  },
+  "payload": "{\"action\":\"produce_task_spec\"}",
+  "epoch": 1782668362,
+  "metadata": {},
+  "signature": "3046022100...",
+  "issues": [],
+  "parent_envelope": { ... }
+}
+```
 
-## Record, the permanent store
+| Field | Description |
+| --- | --- |
+| `from` | Sender Actor |
+| `to` | Recipient Actor |
+| `payload` | Action or message exchanged between Actors |
+| `epoch` | Unix timestamp |
+| `metadata` | Optional metadata |
+| `signature` | Digital signature over the Envelope |
+| `issues` | Verification or authorization findings |
+| `parent_envelope` | Previous Envelope in the workflow |
 
-Identities, policy cards, and finished audit trails are all stored as Records in Immutable Provenance. A Record is the immutable home for a piece of AgentDNA data. The [Records reference](../sdk/nfts.md) describes the four kinds the system uses.
+## IntentWorkflow
 
-## How the five fit together
+An `IntentWorkflow` represents the complete lifecycle of an intent.
 
-A user with an **agent ID** signs an intent, producing an **envelope**. An agent receives it, verifies the **chain** so far, checks the action against its **card**, and signs its own envelope on top. When the flow finishes, the complete chain is written to an audit **Record**. Each term is one link in that sequence.
+Rather than storing a sequence of events, AgentDNA stores the latest `Envelope`. Every Envelope recursively references its parent, allowing the entire chain of custody to be reconstructed from a single object.
+
+For example:
+
+```json
+{
+  "type": "intent_workflow",
+  "version": "1.0",
+  "remarks": "",
+  "info": {},
+  "envelope": {
+    "from": {
+      "id": "worker_actor_id",
+      "name": "WorkerAgent",
+      "type": "agent",
+      "metadata": {}
+    },
+    "to": {
+      "id": "coordinator_actor_id",
+      "name": "CoordinatorAgent",
+      "type": "agent",
+      "metadata": {}
+    },
+    "payload": "{\"status\":\"completed\"}",
+    "epoch": 1782668370,
+    "metadata": {},
+    "signature": "...",
+    "issues": [],
+    "parent_envelope": {
+      "from": {
+        "id": "coordinator_actor_id",
+        "name": "CoordinatorAgent",
+        "type": "agent",
+        "metadata": {}
+      },
+      "to": {
+        "id": "worker_actor_id",
+        "name": "WorkerAgent",
+        "type": "agent",
+        "metadata": {}
+      },
+      "payload": "{\"action\":\"produce_task_spec\"}",
+      "epoch": 1782668362,
+      "metadata": {},
+      "signature": "...",
+      "issues": [],
+      "parent_envelope": {
+        "... previous envelope ..."
+      }
+    }
+  }
+}
+```
+
+Each `parent_envelope` links to the previous interaction, forming a nested chain that captures the complete journey of an intent from its origin to its final outcome.
+
+## Cards
+
+Cards are immutable records stored on the Provenance Layer. They represent persistent identities and completed workflows that can be independently retrieved and verified. These can thought of as immutable append-log files, where the only way to edit information is to append new information. This allows us to version check on the changes made on a card. One such instance is Agent Card, where every entry reflects the policy change of the Agent.
+
+### UserCard
+
+A `UserCard` represents a Human identity.
+
+```python
+@dataclass
+class UserCard:
+    type: str
+    id: str
+    metadata: dict[str, Any] = field(default_factory=dict)
+```
+
+| Field | Description |
+| --- | --- |
+| `type` | Card type. Supported values: `human`, `agent` and `app` |
+| `id` | Unique identifier of the User Card. |
+| `metadata` | Optional metadata associated with the user identity. |
+
+### AgentCard
+
+An `AgentCard` represents a deployed AI Agent.
+
+```python
+@dataclass
+class AgentCard:
+    type: str
+    id: str
+    metadata: dict[str, Any] = field(default_factory=dict)
+    policy: str = ""
+```
+
+| Field | Description |
+| --- | --- |
+| `type` | Card type. For example, `agent`. |
+| `id` | Unique identifier of the Agent Card. |
+| `metadata` | Optional metadata describing the deployed Agent. |
+| `policy` | The Agent's policy document captured at deployment time. |
+
+### Workflow Provenance Card
+
+A Workflow Provenance Card represents a completed `IntentWorkflow`.
+
+Unlike User and Agent Cards, which represent identities, a Workflow Provenance Card captures a complete execution of an intent.
+
+It stores the final `IntentWorkflow`, including the nested Envelope chain and all associated signatures. Since each Envelope references its parent, the stored workflow preserves the complete chain of custody from the initiating Human through every participating Agent and application to the final response.
+
+This immutable record allows the entire workflow to be independently verified and audited at any point in the future.

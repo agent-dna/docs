@@ -8,13 +8,29 @@
 
 @import './palette.css';
 
+html {
+  background-color: var(--adna-surface);
+}
+
+body {
+  color: var(--adna-ink);
+}
+
+.navbar {
+  /* Kept white in both themes so the navy logo mark stays legible. */
+  --ifm-navbar-background-color: #ffffff;
+  --ifm-navbar-link-color: #0a2240;
+  --ifm-navbar-link-hover-color: var(--adna-primary);
+  box-shadow: 0 1px 0 var(--adna-border);
+}
+
+.menu__link--active,
+.table-of-contents__link--active {
+  color: var(--adna-primary);
+}
+
 .hero--adna {
-  background: linear-gradient(
-    135deg,
-    var(--adna-primary-darkest) 0%,
-    var(--adna-primary) 60%,
-    var(--adna-accent-dark) 100%
-  );
+  background: var(--adna-primary);
   color: #ffffff;
 }
 

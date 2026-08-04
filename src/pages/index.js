@@ -17,17 +17,18 @@ function HomepageHeader() {
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
         <p className={styles.heroNote}>
-          Verifiable identity, signed chains of custody, and policy-checked
-          actions for systems where agents hand work to one another.
+          AgentDNA was built to ensure that every autonomous decision can be
+          identified, verified, authorized and audited.
         </p>
         <div className={styles.buttons}>
           <Link className="button button--secondary button--lg" to="/docs/intro">
             Read the documentation
           </Link>
           <Link
-            className="button button--outline button--secondary button--lg"
-            to="/docs/concepts/the-problem">
-            Why a trust layer
+            className="button button--outline button--lg"
+            to="/docs/concepts/the-problem"
+            style={{color: '#ffffff', borderColor: '#ffffff'}}>
+            The problem it solves
           </Link>
         </div>
       </div>
@@ -40,7 +41,7 @@ export default function Home() {
   return (
     <Layout
       title={siteConfig.title}
-      description="A trust layer for multi-agent AI systems: verifiable identity, signed chains of custody, and policy-checked actions.">
+      description="Security, Governance and Audit framework for AI Agents.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

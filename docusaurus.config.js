@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'AgentDNA',
-  tagline: 'Identity, Authorization & Provenance for AI Agents',
-  favicon: 'img/favicon.ico',
+  tagline: 'Security, Governance and Audit framework for AI Agents',
+  favicon: 'img/favicon.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -65,10 +65,10 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'AgentDNA',
         logo: {
-          alt: 'AgentDNA Logo',
-          src: 'img/logo.svg',
+          alt: 'AgentDNA',
+          src: 'img/agentdna-logo.png',
+          height: 42,
         },
         items: [
           {
@@ -95,25 +95,20 @@ const config = {
                 to: '/docs/intro',
               },
               {
-                label: 'Core concepts',
+                label: 'The problem it solves',
                 to: '/docs/concepts/the-problem',
               },
               {
-                label: 'SDK guide',
-                to: '/docs/sdk/build-and-handle',
-              },
-            ],
-          },
-          {
-            title: 'Reference',
-            items: [
-              {
-                label: 'CBAC',
-                to: '/docs/sdk/cbac',
+                label: 'Pillars of AgentDNA',
+                to: '/docs/concepts/coca-and-cbac',
               },
               {
-                label: 'Glossary',
-                to: '/docs/reference/glossary',
+                label: 'Core Data Structures',
+                to: '/docs/concepts/mental-model',
+              },
+              {
+                label: 'Getting Started',
+                to: '/docs/examples/quickstart',
               },
             ],
           },

@@ -4,6 +4,6 @@
   "link": {
     "type": "generated-index",
     "title": "Core concepts",
-    "description": "The ideas behind AgentDNA: the problem it solves, the vocabulary you need, and the two guarantees it provides."
+    "description": "The problem AgentDNA solves, the pillars it's built on, and its core data structures."
   }
 }
