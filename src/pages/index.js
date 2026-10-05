@@ -24,12 +24,12 @@ function HomepageHeader() {
           <Link className="button button--secondary button--lg" to="/docs/intro">
             Read the documentation
           </Link>
-          <Link
+          {/* <Link
             className="button button--outline button--lg"
             to="/docs/concepts/the-problem"
             style={{color: '#ffffff', borderColor: '#ffffff'}}>
             The problem it solves
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
