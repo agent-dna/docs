@@ -5,37 +5,36 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Verifiable identity',
+    title: 'Chain of Custody Authentication',
     description: (
       <>
-        Every agent and user gets a Decentralized Identifier backed by a
-        keypair. Actions are tied to a key that only one party controls, so
-        provenance is something you can check rather than something you trust.
+        CoCA captures every interaction between participants as a
+        cryptographically signed Envelope, forming a verifiable chain of
+        custody from the original requester to the final outcome.
       </>
     ),
-    to: '/docs/concepts/mental-model',
+    to: '/docs/concepts/coca-and-cbac#1-chain-of-custody-authentication-coca',
   },
   {
-    title: 'Signed chain of custody',
+    title: 'Context Based Access Control',
     description: (
       <>
-        Each message wraps and signs the one before it. The signature at the top
-        of a chain covers every earlier hop, so the final record proves who
-        asked whom, all the way back to the original intent.
+        CBAC verifies every signed participant in the chain and validates
+        that the Agent's current policy permits the requested action,
+        calculating a Trust score for the Agent.
       </>
     ),
-    to: '/docs/sdk/envelope-and-chain',
+    to: '/docs/concepts/coca-and-cbac#2-context-based-access-control-cbac',
   },
   {
-    title: 'Policy-checked actions',
+    title: 'Immutable Provenance',
     description: (
       <>
-        Before an agent touches the outside world, its action is checked against
-        a signed policy card. The allow or deny decision is recorded in the
-        audit trail next to the action it governed.
+        Every completed workflow can be committed to the Provenance Layer as
+        an immutable, tamper-evident provenance record.
       </>
     ),
-    to: '/docs/sdk/cbac',
+    to: '/docs/concepts/coca-and-cbac#3-immutable-provenance',
   },
 ];
 

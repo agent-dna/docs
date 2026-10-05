@@ -10,8 +10,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'AgentDNA',
-  tagline: 'Identity, Authorization & Provenance for AI Agents',
-  favicon: 'img/favicon.ico',
+  tagline: 'Security, Governance and Audit framework for AI Agents',
+  favicon: 'img/favicon.png',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -20,11 +20,16 @@ const config = {
 
   // Set the production url of your site here
   url: 'https://docs.agentdna.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
+  // Set the /<baseUrl>/ pathname under which your site is served.
+  // A custom domain serves the site from the root, so this stays '/'.
   baseUrl: '/',
 
-  organizationName: 'agentdna',
-  projectName: 'agentdna-docs',
+  // GitHub Pages deployment: github.com/agent-dna/docs
+  organizationName: 'agent-dna',
+  projectName: 'docs',
+  // GitHub Pages serves /foo/ as foo/index.html; being explicit avoids
+  // redirects and broken relative links.
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 
@@ -46,8 +51,8 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Set this to your repository to enable the "edit this page" links.
-          editUrl: 'https://github.com/agentdna/agentdna-docs/tree/main/',
+          // "Edit this page" links disabled. Uncomment to re-enable.
+          // editUrl: 'https://github.com/agentdna/docs/tree/main/',
         },
         blog: false,
         theme: {
@@ -62,23 +67,26 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        respectPrefersColorScheme: true,
+        // Dark mode disabled. To re-enable, restore the line below and remove
+        // `defaultMode` and `disableSwitch`.
+        // respectPrefersColorScheme: true,
+        defaultMode: 'light',
+        disableSwitch: true,
       },
       navbar: {
-        title: 'AgentDNA',
         logo: {
-          alt: 'AgentDNA Logo',
-          src: 'img/logo.svg',
+          alt: 'AgentDNA',
+          src: 'img/agentdna-logo.png',
+          height: 42,
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'docsSidebar',
-            position: 'left',
-            label: 'Documentation',
+            href: 'https://dashboard.agentdna.io',
+            label: 'Dashboard',
+            position: 'right',
           },
           {
-            href: 'https://github.com/agentdna',
+            href: 'https://github.com/agent-dna/agentdna',
             label: 'GitHub',
             position: 'right',
           },
@@ -86,48 +94,18 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Documentation',
-            items: [
-              {
-                label: 'Introduction',
-                to: '/docs/intro',
-              },
-              {
-                label: 'Core concepts',
-                to: '/docs/concepts/the-problem',
-              },
-              {
-                label: 'SDK guide',
-                to: '/docs/sdk/build-and-handle',
-              },
-            ],
-          },
-          {
-            title: 'Reference',
-            items: [
-              {
-                label: 'CBAC',
-                to: '/docs/sdk/cbac',
-              },
-              {
-                label: 'Glossary',
-                to: '/docs/reference/glossary',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/agentdna',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} AgentDNA. Built with Docusaurus.`,
+        // links: [
+        //   {
+        //     title: 'More',
+        //     items: [
+        //       {
+        //         label: 'GitHub',
+        //         href: 'https://github.com/agentdna',
+        //       },
+        //     ],
+        //   },
+        // ],
+        copyright: `Copyright © ${new Date().getFullYear()} AgentDNA`,
       },
       prism: {
         theme: prismThemes.github,

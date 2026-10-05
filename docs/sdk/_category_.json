@@ -1,9 +1,0 @@
-{
-  "label": "SDK guide",
-  "position": 3,
-  "link": {
-    "type": "generated-index",
-    "title": "SDK guide",
-    "description": "How to use the AgentDNA SDK: the two core methods, the package layout, the envelope and chain model, on-chain storage, and policy enforcement."
-  }
-}
