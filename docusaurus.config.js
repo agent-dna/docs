@@ -46,8 +46,8 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
-          // Set this to your repository to enable the "edit this page" links.
-          editUrl: 'https://github.com/agentdna/agentdna-docs/tree/main/',
+          // "Edit this page" links disabled. Uncomment to re-enable.
+          // editUrl: 'https://github.com/agentdna/docs/tree/main/',
         },
         blog: false,
         theme: {
@@ -62,7 +62,11 @@ const config = {
     ({
       image: 'img/docusaurus-social-card.jpg',
       colorMode: {
-        respectPrefersColorScheme: true,
+        // Dark mode disabled. To re-enable, restore the line below and remove
+        // `defaultMode` and `disableSwitch`.
+        // respectPrefersColorScheme: true,
+        defaultMode: 'light',
+        disableSwitch: true,
       },
       navbar: {
         logo: {
@@ -72,13 +76,12 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
-            sidebarId: 'docsSidebar',
-            position: 'left',
-            label: 'Documentation',
+            href: 'https://dashboard.agentdna.io',
+            label: 'Dashboard',
+            position: 'right',
           },
           {
-            href: 'https://github.com/agentdna',
+            href: 'https://github.com/agent-dna/agentdna',
             label: 'GitHub',
             position: 'right',
           },
@@ -86,43 +89,18 @@ const config = {
       },
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Documentation',
-            items: [
-              {
-                label: 'Introduction',
-                to: '/docs/intro',
-              },
-              {
-                label: 'The problem it solves',
-                to: '/docs/concepts/the-problem',
-              },
-              {
-                label: 'Pillars of AgentDNA',
-                to: '/docs/concepts/coca-and-cbac',
-              },
-              {
-                label: 'Core Data Structures',
-                to: '/docs/concepts/mental-model',
-              },
-              {
-                label: 'Getting Started',
-                to: '/docs/examples/quickstart',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'GitHub',
-                href: 'https://github.com/agentdna',
-              },
-            ],
-          },
-        ],
-        copyright: `Copyright © ${new Date().getFullYear()} AgentDNA. Built with Docusaurus.`,
+        // links: [
+        //   {
+        //     title: 'More',
+        //     items: [
+        //       {
+        //         label: 'GitHub',
+        //         href: 'https://github.com/agentdna',
+        //       },
+        //     ],
+        //   },
+        // ],
+        copyright: `Copyright © ${new Date().getFullYear()} AgentDNA`,
       },
       prism: {
         theme: prismThemes.github,

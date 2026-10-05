@@ -1,7 +1,7 @@
 ---
 id: coca-and-cbac
 title: Pillars of AgentDNA
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Pillars of AgentDNA
