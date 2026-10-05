@@ -20,11 +20,16 @@ const config = {
 
   // Set the production url of your site here
   url: 'https://docs.agentdna.io',
-  // Set the /<baseUrl>/ pathname under which your site is served
+  // Set the /<baseUrl>/ pathname under which your site is served.
+  // A custom domain serves the site from the root, so this stays '/'.
   baseUrl: '/',
 
-  organizationName: 'agentdna',
-  projectName: 'agentdna-docs',
+  // GitHub Pages deployment: github.com/agent-dna/docs
+  organizationName: 'agent-dna',
+  projectName: 'docs',
+  // GitHub Pages serves /foo/ as foo/index.html; being explicit avoids
+  // redirects and broken relative links.
+  trailingSlash: false,
 
   onBrokenLinks: 'throw',
 
