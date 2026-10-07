@@ -65,7 +65,8 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      image: 'img/docusaurus-social-card.jpg',
+      // Social preview image (og:image / twitter:image), 1200x630.
+      image: 'img/agentdna-social-card.png',
       colorMode: {
         // Dark mode disabled. To re-enable, restore the line below and remove
         // `defaultMode` and `disableSwitch`.
