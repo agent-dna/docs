@@ -98,7 +98,7 @@ if verification_code != RESULT_OK:
     raise RuntimeError("Invalid AgentDNA workflow")
 ```
 
-This verifies the chain of custody and evaluates whether the request should be accepted according to the Assistant's policy. The returned value is one of the Envelope [status codes](../concepts/mental-model.md#status-codes).
+This verifies the graph of delegation and evaluates whether the request should be accepted according to the Assistant's policy. The returned value is one of the Envelope [status codes](../concepts/mental-model.md#status-codes).
 
 Only after successful verification should the Assistant perform its work. When verification fails, the failure should be recorded before the request is rejected.
 
@@ -119,7 +119,7 @@ The workflow now contains two linked Envelopes:
 Alice ─────────▶ Assistant ─────────▶ Alice
 ```
 
-Notice that the original request is preserved. The Assistant simply appends a new signed Envelope, extending the chain of custody.
+Notice that the original request is preserved. The Assistant simply appends a new signed Envelope, extending the graph of delegation.
 
 ## Step 4. Store the completed workflow
 
@@ -147,6 +147,6 @@ Perform work
 Forward workflow
 ```
 
-As the workflow propagates between Actors, each Actor appends a signed Envelope. By the time the workflow completes, the nested Envelopes form a verifiable chain of custody that records every participant, every decision and every interaction from the original request to the final response. Remember, workflow provenance is created for both successful and failed interactions between Actors.
+As the workflow propagates between Actors, each Actor appends a signed Envelope. By the time the workflow completes, the nested Envelopes form a verifiable graph of delegation that records every participant, every decision and every interaction from the original request to the final response. Remember, workflow provenance is created for both successful and failed interactions between Actors.
 
 The same mechanism used to secure human-agent communication can also be applied to agent-agent communication. To secure an Agent's access to external resources such as MCP servers, see [Securing Agent-Resource Interaction](./agent-resource-interaction.md).

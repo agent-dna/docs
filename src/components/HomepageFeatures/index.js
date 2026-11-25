@@ -5,26 +5,26 @@ import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Chain of Custody Authentication',
+    title: 'Graph of Delegation',
     description: (
       <>
-        CoCA captures every interaction between participants as a
-        cryptographically signed Envelope, forming a verifiable chain of
-        custody from the original requester to the final outcome.
+        GRADE captures every interaction between participants as a
+        cryptographically signed Envelope, forming a verifiable graph of
+        delegation from the original requester to the final outcome.
       </>
     ),
-    to: '/docs/concepts/coca-and-cbac#1-chain-of-custody-authentication-coca',
+    to: '/docs/concepts/grade-and-cbac#1-graph-of-delegation-grade',
   },
   {
     title: 'Context Based Access Control',
     description: (
       <>
-        CBAC verifies every signed participant in the chain and validates
+        CBAC verifies every signed participant in the graph and validates
         that the Agent's current policy permits the requested action,
         calculating a Trust score for the Agent.
       </>
     ),
-    to: '/docs/concepts/coca-and-cbac#2-context-based-access-control-cbac',
+    to: '/docs/concepts/grade-and-cbac#2-context-based-access-control-cbac',
   },
   {
     title: 'Immutable Provenance',
@@ -34,7 +34,7 @@ const FeatureList = [
         an immutable, tamper-evident provenance record.
       </>
     ),
-    to: '/docs/concepts/coca-and-cbac#3-immutable-provenance',
+    to: '/docs/concepts/grade-and-cbac#3-immutable-provenance',
   },
 ];
 
