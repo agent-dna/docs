@@ -8,9 +8,9 @@ sidebar_position: 2
 
 Agentic applications frequently allow an Agent to access external resources on behalf of a user. This introduces additional security risks: an Agent may be manipulated by an untrusted Actor or induced to access resources beyond the authority granted by the user.
 
-This is where [CoCA and CBAC](../concepts/coca-and-cbac.md) become relevant.
+This is where [GRADE and CBAC](../concepts/grade-and-cbac.md) become relevant.
 
-We have already seen CoCA in action in the [previous topic](./agent-user-interaction.md). CBAC provides an authorization decision for resource access based on the request context and the configured authorization policies.
+We have already seen GRADE in action in the [previous topic](./agent-user-interaction.md). CBAC provides an authorization decision for resource access based on the request context and the configured authorization policies.
 
 Consider the previous example with an MCP server added as the resource provider:
 
@@ -117,7 +117,7 @@ Currently supported MCP client integrations:
 The security checks include:
 
 - Agent whitelisting
-- CoCA verification
+- GRADE verification
 - CBAC verification
 
 Failures are reported using the Envelope [status codes](../concepts/mental-model.md#status-codes).

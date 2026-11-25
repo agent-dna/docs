@@ -60,7 +60,7 @@ The following status codes are set on an Envelope:
 | `2001` | Envelope verification failed under `light` mode |
 | `2002` | Envelope verification failed under `heavy` mode |
 | `2003` | Envelope verification failed under `boundary` mode |
-| `2999` | CoCA verification failure for an unknown reason |
+| `2999` | GRADE verification failure for an unknown reason |
 | `4001` | MCP Tool execution error. A special case where the workflow isn't interrupted |
 | `4002` | Generic Middleware execution error |
 
@@ -68,7 +68,7 @@ The following status codes are set on an Envelope:
 
 An `IntentWorkflow` represents the complete lifecycle of an intent.
 
-Rather than storing a sequence of events, AgentDNA stores the latest `Envelope`. Every Envelope recursively references its parents, allowing the entire chain of custody to be reconstructed from a single object.
+Rather than storing a sequence of events, AgentDNA stores the latest `Envelope`. Every Envelope recursively references its parents, allowing the entire graph of delegation to be reconstructed from a single object.
 
 `IntentWorkflow` is a DTO (Data Transfer Object) that is passed between the Actors of an agentic workflow.
 
@@ -104,7 +104,7 @@ For example:
 }
 ```
 
-Each `parent_envelope` links to the previous interactions, forming a nested chain that captures the complete journey of an intent from its origin to its final outcome.
+Each `parent_envelope` links to the previous interactions, forming a graph that captures the complete journey of an intent from its origin to its final outcome.
 
 ## Cards
 
@@ -154,6 +154,6 @@ A Workflow Provenance Card represents a completed `IntentWorkflow`.
 
 Unlike User and Agent Cards, which represent identities, a Workflow Provenance Card captures a complete execution of an intent.
 
-It stores the final `IntentWorkflow`, including the nested Envelope chain and all associated signatures. Since each Envelope references its parents, the stored workflow preserves the complete chain of custody from the initiating Human through every participating Agent and tool to the final response.
+It stores the final `IntentWorkflow`, including the Envelope Graph and all associated signatures. Since each Envelope references its parents, the stored workflow preserves the complete graph of delegation from the initiating Human through every participating Agent and tool to the final response.
 
 This immutable record allows the entire workflow to be independently verified and audited at any point in the future.
